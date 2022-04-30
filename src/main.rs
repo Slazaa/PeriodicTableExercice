@@ -32,9 +32,9 @@ fn main() {
 	let mut rng = rand::thread_rng();
 
 	loop {
-		let atomic_number: u8 = rng.gen_range(1..118);
+		let atomic_number: u8 = rng.gen_range(1..=118);
 
-		println!("What is the symbol of the element with an atomic number of {} ?", atomic_number);
+		println!("What is the atomic number of the element the symbol {} ?", atoms[(atomic_number - 1) as usize].symbol);
 
 		let mut answer = String::new();
 
@@ -42,13 +42,23 @@ fn main() {
 			.read_line(&mut answer)
 			.unwrap();
 
-		answer = answer.trim().to_owned();
-		let correct_symbol = &atoms.iter().find(|x| x.atomic_number == atomic_number).unwrap().symbol;
+		let answer_res = answer.trim().to_owned().parse();
+		let answer: u8;
 
-		if answer.as_str() == correct_symbol.as_str() {
+		match answer_res {
+			Ok(x) => answer = x,
+			Err(_) => {
+				println!("Invalid input!");
+				continue
+			}
+		}
+
+		let correct = atoms.iter().find(|x| x.atomic_number == atomic_number).unwrap().atomic_number;
+
+		if answer == correct {
 			println!("Correct!");
 		} else {
-			println!("Wrong, the correct answer was {}!", correct_symbol);
+			println!("Wrong, the correct answer was {}!", correct);
 		}
 	}
 }

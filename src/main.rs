@@ -4,8 +4,7 @@ use rand::*;
 
 struct Atom {
 	pub atomic_number: u8,
-	pub symbol: String,
-	pub name: String
+	pub symbol: String
 }
 
 fn main() {
@@ -24,8 +23,7 @@ fn main() {
 	for i in 0..118 {
 		atoms.push(Atom {
 			atomic_number: i + 1,
-			symbol: symbols[i as usize].to_owned(),
-			name: "".to_owned()
+			symbol: symbols[i as usize].to_owned()
 		});
 	}
 

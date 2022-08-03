@@ -20,7 +20,7 @@ fn main() {
 
 	let mut atoms = Vec::new();
 
-	for i in 0..118 {
+	for i in 0..symbols.len() {
 		atoms.push(Atom {
 			atomic_number: i + 1,
 			symbol: symbols[i as usize].to_owned()
@@ -55,8 +55,9 @@ fn main() {
 
 		if answer == correct {
 			println!("Correct!");
-		} else {
-			println!("Wrong, the correct answer was {}!", correct);
+			continue;
 		}
+		
+		println!("Wrong, the correct answer was {}!", correct);
 	}
 }
